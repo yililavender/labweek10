@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 
 export default class DataEntryForm extends Component {
 
-    provinces = ["Alberta", "British Columbia", "Manitoba", "New Brunswick", "Newfoundland and Labrador", "Nova Scotia", "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan"];
+    provinces = ["Alberta", "British Columbia", "Manitoba", "New Brunswick", 
+        "Newfoundland and Labrador", "Nova Scotia", "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan"]
 
     constructor(props) {
         super(props)
@@ -18,36 +19,37 @@ export default class DataEntryForm extends Component {
         }
     }
 
-    readData = (event) => {
-        this.setState({[event.target.name]: event.target.value});
+    handleChange = (event) => {
+        this.setState({[event.target.name]: event.target.value})
     }
 
-    submitData = (e) => {
-        e.preventDefault();
-        console.log(JSON.stringify(this.state));
+    handleSubmit = (event) => {
+        event.preventDefault()
     }
 
     render() {
         return (
             <fieldset>
                 <h1>Data Entry Form</h1>
-                <form onSubmit={this.submitData}>
+                <form onSubmit={this.handleSubmit} >
                     <label>Email</label>
-                    <input name="email" placeholder="Enter Email" type="text" onChange={this.readData}/>
+                    <input name="email" placeholder="Enter Email" type="text" onChange={this.handleChange}/>
                     <label>Name</label>
-                    <input name="name" placeholder="Full Name" type="text" onChange={this.readData}/>
+                    <input name="name" placeholder="Full Name" type="text" onChange={this.handleChange}/>
                     <br/>
                     <label>Address 1</label>
-                    <input name="address1" placeholder="1234 Main St" type="text" onChange={this.readData}/>
+                    <br/>
+                    <input name="address1" placeholder="160 Bloor St" type="text" onChange={this.handleChange}/>
                     <br/>
                     <label>Address 2</label>
-                    <input name="address2" placeholder="Apartment, studio or floor" type="text" onChange={this.readData}/>
+                    <br/>
+                    <input name="address2" placeholder="House or Condo" type="text" onChange={this.handleChange}/>
                     <br/>
                     <label>City</label>
-                    <input name="city" placeholder="Toronto" type="text" onChange={this.readData}/>
+                    <input name="city" placeholder="Toronto" type="text" onChange={this.handleChange}/>
                     <label>Province</label>
                     <select name="province">
-                        <option value="">Choose...</option>
+                        <option value="">Select a Province</option>
                         {
                             this.provinces.map(name => (
                                 <option key={name}>{name}</option>
@@ -55,23 +57,21 @@ export default class DataEntryForm extends Component {
                         }
                     </select>
                     <label>Postal Code</label>
-                    <input name="postalCode" placeholder="D3R 8W5" type="text" onChange={this.readData}/>
+                    <input name="postalCode" placeholder="M3T 1A8" type="text" onChange={this.handleChange}/>
                     <br/>
                     
-                    
-                    <button type="submit" onClick={this.submitData}>Submit</button>
+                    <button type="submit" onClick={this.handleSubmit}>Submit</button>
                 </form>
 
                 <div>
-                    <h3>Email: {this.state.email}</h3>
-                    <h3>Full Name: {this.state.name}</h3>
-                    <h3>Address: {this.state.address1} {this.state.address2}</h3>
-                    <h3>City: {this.state.city}</h3>
-                    <h3>Province: {this.state.province}</h3>
-                    <h3>Postal Code: {this.state.postalCode}</h3>
+                    <p>Email: {this.state.email}</p>
+                    <p>Full Name: {this.state.name}</p>
+                    <p>Address: {this.state.address1} {this.state.address2}</p>
+                    <p>City: {this.state.city}</p>
+                    <p>Province: {this.state.province}</p>
+                    <p>Postal Code: {this.state.postalCode}</p>
                 </div>
             </fieldset>
         )
     }
 }
-// <input type="submit" value="Submit"/>
